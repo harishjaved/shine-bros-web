@@ -100,7 +100,7 @@ export default function ContactFAQ() {
                   <span className="text-sm text-gray-700 font-medium">{siteConfig.address}</span>
                 </div>
                 <a 
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(siteConfig.address)}`}
+                  href="https://share.google/o5Pvtd3le14ShaJ9s"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto text-center px-5 py-2.5 bg-[var(--color-primary)] hover:bg-red-700 text-white text-sm font-bold rounded-lg transition-colors shrink-0"

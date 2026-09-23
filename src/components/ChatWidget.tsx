@@ -43,7 +43,7 @@ export default function ChatWidget() {
           botReply = "We offer a wide range of services including Exterior & Interior Detailing, Ceramic Coating, Paint Correction, and standard Car Washes. We treat every car like it's our own!";
           break;
         case "📍 Location":
-          botReply = `We are located at ${siteConfig.address}. You can find us on Google Maps here: https://maps.app.goo.gl/9h4hQjR7g4w7x1g7A`;
+          botReply = `We are located at ${siteConfig.address}. You can find us on Google Maps here: https://share.google/o5Pvtd3le14ShaJ9s`;
           break;
         case "📞 Contact":
           botReply = `You can call us directly at ${siteConfig.phone} or chat with us on WhatsApp!`;
