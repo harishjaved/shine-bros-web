@@ -94,11 +94,19 @@ export default function ContactFAQ() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="rounded-xl w-full h-full object-cover"
               />
-              <div className="absolute bottom-6 left-6 right-6 z-20 flex justify-between items-center bg-white/90 backdrop-blur-md p-4 rounded-xl border border-gray-200">
+              <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row justify-between items-center bg-white/90 backdrop-blur-md p-4 rounded-xl border border-gray-200 gap-4">
                 <div className="flex items-start gap-3">
                   <MapPin className="text-[var(--color-primary)] shrink-0 mt-0.5" size={20} />
                   <span className="text-sm text-gray-700 font-medium">{siteConfig.address}</span>
                 </div>
+                <a 
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(siteConfig.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto text-center px-5 py-2.5 bg-[var(--color-primary)] hover:bg-red-700 text-white text-sm font-bold rounded-lg transition-colors shrink-0"
+                >
+                  Get Directions
+                </a>
               </div>
             </div>
           </motion.div>
