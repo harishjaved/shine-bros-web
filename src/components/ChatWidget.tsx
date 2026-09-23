@@ -43,7 +43,7 @@ export default function ChatWidget() {
           botReply = "We offer a wide range of services including Exterior & Interior Detailing, Ceramic Coating, Paint Correction, and standard Car Washes. We treat every car like it's our own!";
           break;
         case "📍 Location":
-          botReply = `We are located at ${siteConfig.address}. You can find us on Google Maps here: ${siteConfig.googleMapsUrl}`;
+          botReply = `We are located at ${siteConfig.address}. You can find us on Google Maps here: https://maps.app.goo.gl/9h4hQjR7g4w7x1g7A`;
           break;
         case "📞 Contact":
           botReply = `You can call us directly at ${siteConfig.phone} or chat with us on WhatsApp!`;
@@ -65,12 +65,15 @@ export default function ChatWidget() {
     }, 600);
   };
 
-  // Format bold text
+  // Format bold text and links
   const formatText = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*)/g);
+    const parts = text.split(/(\*\*.*?\*\*|https?:\/\/[^\s]+)/g);
     return parts.map((part, index) => {
       if (part.startsWith("**") && part.endsWith("**")) {
         return <strong key={index} className="font-bold">{part.slice(2, -2)}</strong>;
+      }
+      if (part.startsWith("http")) {
+        return <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline break-all">{part}</a>;
       }
       return part;
     });
@@ -78,10 +81,21 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating WhatsApp Button */}
+      <a
+        href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Hi Shine Bros! I would like to know more about your detailing services.")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`fixed right-6 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-all flex items-center justify-center ${isOpen ? 'bottom-6 scale-0 opacity-0 pointer-events-none' : 'bottom-24 scale-100 opacity-100'}`}
+        aria-label="Chat on WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      </a>
+
+      {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-[100] bg-[var(--color-primary)] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(230,57,70,0.4)] hover:scale-110 transition-transform flex items-center justify-center ${isOpen ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
+        className={`fixed bottom-6 right-6 z-[100] bg-[var(--color-primary)] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(230,57,70,0.4)] hover:scale-110 transition-all flex items-center justify-center ${isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'}`}
         aria-label="Open Chat"
       >
         <MessageSquare size={28} />
@@ -112,11 +126,11 @@ export default function ChatWidget() {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 bg-[#1a1a1a] p-4 overflow-y-auto max-h-[350px] min-h-[250px] flex flex-col gap-4">
+        <div className="flex-1 bg-[#1a1a1a] p-4 overflow-y-auto max-h-[350px] min-h-[250px] flex flex-col gap-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-[#333] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
           {messages.map((msg) => (
             <div 
               key={msg.id} 
-              className={`max-w-[85%] rounded-xl p-3 text-sm leading-relaxed ${
+              className={`max-w-[85%] rounded-xl p-3 text-sm leading-relaxed break-words whitespace-pre-wrap ${
                 msg.sender === "bot" 
                   ? "bg-[#252525] text-gray-100 self-start rounded-tl-none border border-[#333]" 
                   : "bg-[var(--color-primary)] text-white self-end rounded-tr-none"
