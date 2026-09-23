@@ -12,7 +12,7 @@ import BookingForm from "@/components/BookingForm";
 import ContactFAQ from "@/components/ContactFAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
       <ContactFAQ />
       <FinalCTA />
       <Footer />
-      <FloatingWhatsApp />
+      <ChatWidget />
     </main>
   );
 }
